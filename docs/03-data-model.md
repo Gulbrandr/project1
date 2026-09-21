@@ -12,6 +12,15 @@ Normalized. Balances are derived from ledgers, never stored as mutable columns.
 - `HabitStreak(id, userId, taskId, current, longest, lastCreditedOn)`
 - `Reflection(id, userId, periodStart, periodEnd, prompt, body)`
 
+## Social
+
+- `Connection(id, userAId, userBId, status, createdAt)` — symmetric, stored once with a
+  canonical ordering. Degree-2 reachability is computed, never denormalized.
+- `Attestation(id, claimId, attesterUserId, phoneHash, redeemedAt, linkedAccount)` —
+  `phoneHash` only; plaintext numbers are never stored.
+- `SharedClaim(id, milestoneId, energy, createdAt)` + participants — one real event,
+  one claim, joint energy.
+
 ## Economy
 
 - `MoteLedger(id, userId, delta, reason, refType, refId, createdAt)`

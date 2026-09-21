@@ -19,7 +19,9 @@ Milestone definitions, claims and the daily claim cap ship here, since equipment
 no other source. Effect resolution becomes a modifier pipeline before the third class ships.
 
 ## M5 — Coop
-WebSocket gateway hosting the engine, lobby, reconnect, autopilot for dropped players.
+WebSocket gateway hosting the engine, invite-only lobby, reconnect, autopilot for
+dropped players. Social graph with degree-2 reachability. No matchmaking, no stranger
+lobbies, so no moderation, reporting or chat surface to build.
 
 ## M6 — Self help layer
 Weekly reflection, load balancing suggestions, category insight tied to class affinity,
@@ -38,6 +40,12 @@ ever raises limits; never required to play.
 - Push notifications: opt-in copy needs to stay non-punitive.
 
 ## Settled
+- Social scope is bounded: connections you have, plus one degree out. Open
+  matchmaking is a different product with a trust and moderation surface attached,
+  not a flag we flip.
+- Anti-cheat stays minimal on solo claims, since cheating there only costs the
+  cheater. Guards concentrate on the shared surface, where cheating takes something
+  from someone else.
 - A companion without the app attests by one-time code, sent from the player's own
   phone via the share sheet and entered back into the player's app. The round trip
   proves co-presence, and the redemption screen is the acquisition loop.

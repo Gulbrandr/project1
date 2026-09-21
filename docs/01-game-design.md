@@ -41,6 +41,8 @@ class talent picks (choose 1 of 3), and unlock the class's rare pool for packs.
 - Server-authoritative: clients send intents, server runs the engine, broadcasts events.
 - Designed for async-friendly sessions: a run can pause and resume; a dropped
   player is replaced by a simple autopilot so the party is never stuck.
+- Invite only, from your own social graph or one degree out. No matchmaking, no
+  stranger lobbies. See `docs/06-progression.md` for why.
 - Warden and Steward cards explicitly target allies; solo decks ignore those.
 
 ## Lore

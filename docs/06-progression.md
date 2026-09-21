@@ -113,17 +113,48 @@ clear sender identity and opt-out. The install link is the advertising. A drip c
 to a number that never opted in is not something we do.
 
 Abuse surface: a player controlling a second number (burner or VOIP) can attest their
-own claims. Mitigations:
+own claims. Keep the structural guards, skip the punitive ones:
 
-- Rate limit by number, across every account it has ever attested for, not per player.
-- Per-pair cooldowns apply to phone numbers exactly as they do to linked accounts.
-- A number can back only a small number of distinct pairs.
 - A number already tied to the player's own account cannot attest their claims.
-- An unlinked attestation (code redeemed, app never installed) grants reduced energy
-  compared to one from a linked account.
+- A number can back only a small number of distinct accounts, which stops one person
+  standing up a fake social network.
+- Rate limit by number for cost control.
+
+Dropped deliberately: per-pair cooldowns and frequency caps on how often two people can
+claim together. Two friends who genuinely do things together every day should not hit a
+wall, and the bounded social graph below already removes most of the incentive.
 
 Store the number hashed, for dedupe and rate limiting only. There is no reason to hold
 plaintext contact details for people who are not users.
+
+### Anti-cheat posture
+
+Most cheating here is self-harm. A player who logs chores they did not do gets cards
+for a life they are not living, which is the one thing the app cannot make worth having.
+Guards exist to protect the shared surface and our costs, not to catch people. Where a
+guard would meaningfully inconvenience an honest player to stop a dishonest one from
+hurting only themselves, it does not ship.
+
+The shared surface is the exception: shared energy is the one place cheating takes
+something from another person, so attestation is guarded where solo claims are not.
+
+### Social scope
+
+No open matchmaking, no global player pool, no stranger lobbies. Coop and shared
+milestones require an existing connection: someone you are linked to, or one degree out
+through a mutual. Degree 2 is the ceiling for now.
+
+This is a design decision, not a launch limitation. A bounded graph removes most of the
+collusion incentive structurally, because there are no strangers to farm with and the
+people you could cheat with are people you actually know. It also keeps coop out of
+moderation territory: no lobby browser, no stranger chat, no reporting system, no global
+leaderboards, none of which we want to build or staff at this size.
+
+Opening it up later is possible, but it is a different product with a trust system, a
+moderation surface and a reporting flow attached. Not a flag we flip.
+
+Data consequence: connections are explicit records, and degree-2 reachability is
+computed from them. The social graph is a first-class model, not a friends list.
 
 ### Daily milestone cap
 
