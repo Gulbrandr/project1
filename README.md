@@ -9,7 +9,7 @@ apps/api         NestJS + Prisma + Postgres, authoritative coop server
 packages/shared  Domain types, zod schemas, wire protocol
 packages/engine  Deterministic battle engine (pure TS, no IO)
 packages/content Cards, classes, enemies, packs, lore
-docs/            Design, architecture, data model, economy, roadmap
+docs/            Design, architecture, data model, economy, progression, roadmap
 ```
 
 Start with `docs/00-overview.md`.
@@ -52,6 +52,7 @@ pnpm --filter @adulting/mobile dev
 ## Design rules that decide arguments later
 
 1. Currency comes from real completions only. No purchases, no combat rewards.
+   Cards come from packs, talents from levels, equipment from real-world milestones.
 2. The engine is pure. No `Date.now`, no `Math.random`, no IO, ever.
 3. Solo play works offline. Coop is server-authoritative.
 4. Balances are derived from ledgers, never stored as mutable columns.

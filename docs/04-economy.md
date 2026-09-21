@@ -27,6 +27,18 @@ Pity: a rare is guaranteed within 10 class packs; tracked per user per pool.
 A moderate user (6 tasks/day, mixed difficulty) earns ~150 motes/day, roughly one
 class pack and change. Tune against this table before changing card power.
 
+## Milestones and equipment
+
+Equipment is never bought and never drops in combat. It unlocks on named real-world
+milestones (streak length, domain breadth, elapsed time, recovery after a lapse,
+firsts). Claims are capped per day, and the cap rises with character level. Milestones
+reached past the cap are banked, never lost. See `docs/06-progression.md`.
+
+## Duplicates
+
+A pull past a card's deck-legal cap converts to dust. Dust buys a specific named card,
+giving the pack channel a deterministic floor. Dust is not earned any other way.
+
 ## Anti-abuse
 
 Completions are honor-based by design. Guardrails exist only to protect the
