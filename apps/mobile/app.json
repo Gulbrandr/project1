@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Adulting",
+    "slug": "adulting",
+    "scheme": "adulting",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.adulting.app" },
+    "android": { "package": "com.adulting.app" }
+  }
+}

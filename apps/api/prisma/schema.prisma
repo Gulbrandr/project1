@@ -1,0 +1,260 @@
+// Balances are derived from ledgers. Never store a mutable balance column.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  handle    String   @unique
+  createdAt DateTime @default(now())
+
+  devices     Device[]
+  taskLists   TaskList[]
+  completions TaskCompletion[]
+  motes       MoteLedger[]
+  xp          XpLedger[]
+  characters  Character[]
+  ownership   CardOwnership[]
+  purchases   PackPurchase[]
+  runs        Run[]
+  loreUnlocks LoreUnlock[]
+}
+
+model Device {
+  id         String   @id @default(cuid())
+  userId     String
+  platform   String
+  lastSeenAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model TaskList {
+  id     String @id @default(cuid())
+  userId String
+  name   String
+  domain String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks  Task[]
+
+  @@index([userId])
+}
+
+model Task {
+  id         String    @id @default(cuid())
+  listId     String
+  title      String
+  notes      String?
+  domain     String
+  difficulty String
+  recurrence Json
+  dueAt      DateTime?
+  archivedAt DateTime?
+  updatedAt  DateTime  @updatedAt
+
+  list        TaskList         @relation(fields: [listId], references: [id], onDelete: Cascade)
+  completions TaskCompletion[]
+  streak      HabitStreak?
+
+  @@index([listId])
+}
+
+model TaskCompletion {
+  id                     String   @id @default(cuid())
+  taskId                 String
+  userId                 String
+  completedAt            DateTime
+  clientId               String
+  difficultyAtCompletion String
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Idempotent sync: replaying a push never double-pays.
+  @@unique([taskId, clientId])
+  @@index([userId, completedAt])
+}
+
+model HabitStreak {
+  id             String    @id @default(cuid())
+  userId         String
+  taskId         String    @unique
+  current        Int       @default(0)
+  longest        Int       @default(0)
+  lastCreditedOn DateTime?
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Reflection {
+  id          String   @id @default(cuid())
+  userId      String
+  periodStart DateTime
+  periodEnd   DateTime
+  prompt      String
+  body        String
+  createdAt   DateTime @default(now())
+
+  @@index([userId, periodStart])
+}
+
+model MoteLedger {
+  id        String   @id @default(cuid())
+  userId    String
+  delta     Int
+  reason    String
+  refType   String?
+  refId     String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model XpLedger {
+  id          String   @id @default(cuid())
+  userId      String
+  characterId String
+  delta       Int
+  reason      String
+  refId       String?
+  createdAt   DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  character Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@index([characterId, createdAt])
+}
+
+model Character {
+  id        String   @id @default(cuid())
+  userId    String
+  classId   String
+  name      String
+  createdAt DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  decks Deck[]
+  xp    XpLedger[]
+  runs  RunParticipant[]
+
+  @@index([userId])
+}
+
+model CardOwnership {
+  id         String   @id @default(cuid())
+  userId     String
+  cardDefId  String
+  count      Int      @default(1)
+  foil       Boolean  @default(false)
+  acquiredAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, cardDefId, foil])
+}
+
+model Deck {
+  id          String  @id @default(cuid())
+  characterId String
+  name        String
+  isActive    Boolean @default(false)
+
+  character Character  @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  cards     DeckCard[]
+
+  @@index([characterId])
+}
+
+model DeckCard {
+  deckId    String
+  cardDefId String
+  count     Int    @default(1)
+  deck      Deck   @relation(fields: [deckId], references: [id], onDelete: Cascade)
+
+  @@id([deckId, cardDefId])
+}
+
+model PackPurchase {
+  id         String   @id @default(cuid())
+  userId     String
+  packDefId  String
+  motesSpent Int
+  seed       Int
+  createdAt  DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pulls PackPull[]
+
+  @@index([userId, createdAt])
+}
+
+model PackPull {
+  id         String @id @default(cuid())
+  purchaseId String
+  cardDefId  String
+  rarity     String
+
+  purchase PackPurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
+  @@index([purchaseId])
+}
+
+model Run {
+  id             String    @id @default(cuid())
+  userId         String
+  tractId        String
+  seed           Int
+  contentVersion String
+  status         String
+  startedAt      DateTime  @default(now())
+  endedAt        DateTime?
+
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  participants RunParticipant[]
+  snapshots    BattleSnapshot[]
+
+  @@index([userId, startedAt])
+}
+
+model RunParticipant {
+  runId       String
+  characterId String
+  userId      String
+  role        String
+
+  run       Run       @relation(fields: [runId], references: [id], onDelete: Cascade)
+  character Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  @@id([runId, characterId])
+}
+
+model BattleSnapshot {
+  id          String   @id @default(cuid())
+  runId       String
+  nodeIndex   Int
+  state       Json
+  eventCursor Int
+  createdAt   DateTime @default(now())
+
+  run Run @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, nodeIndex])
+}
+
+model LoreUnlock {
+  userId     String
+  chapterId  String
+  unlockedAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, chapterId])
+}
