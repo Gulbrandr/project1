@@ -33,11 +33,14 @@ ever raises limits; never required to play.
 - Recurrence model: RRULE subset vs custom. Leaning custom (daily/weekly/interval/monthly-day).
 - Do keywords live only on card definitions, or can equipment add keywords to cards?
 - What is the exact daily milestone cap curve by level?
-- Shared milestones when the companion does not use the app: personal credit, or a
-  reduced solo-held shared credit?
+- Server-sent SMS as an attestation fallback: worth the per-message cost and the
+  consent compliance work, or is the native share sheet enough?
 - Push notifications: opt-in copy needs to stay non-punitive.
 
 ## Settled
+- A companion without the app attests by one-time code, sent from the player's own
+  phone via the share sheet and entered back into the player's app. The round trip
+  proves co-presence, and the redemption screen is the acquisition loop.
 - A milestone done with other people is a shared claim paying into joint milestone
   energy, not a personal milestone. One real event, one claim. Shared energy buys
   coop-facing progression only.

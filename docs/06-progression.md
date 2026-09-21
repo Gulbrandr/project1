@@ -93,11 +93,37 @@ Rules:
 - A cooldown applies per pair, so the same two people cannot bank repeat claims for
   the same kind of outing in one day.
 
-Open question: what happens when the companion does not use the app. Options are to
-credit it as an ordinary personal milestone (no double-credit risk exists, since only
-one account is involved), or to let the player flag it as accompanied for a reduced
-shared credit into a solo-held energy pool. Leaning toward the first, since the second
-invents an unverifiable claim type.
+### Attestation by code
+
+A companion without the app can still attest. The player generates a one-time code for
+the claim and sends it to them; the companion enters that code back into the player's
+app. Because the code has to make the round trip through another person's phone and
+back into the claiming device, the flow proves co-presence at claim time, which is
+exactly what a shared milestone asserts. A tapped link would not prove that.
+
+The redemption screen names what it is crediting ("Sam says you went to the store
+together") and carries an install link, so attestation doubles as the acquisition loop.
+If the companion installs and links, both sides get a one-time bonus.
+
+**Send it from the player's own phone, not from our server.** The native share sheet
+(iMessage, WhatsApp, Signal, SMS) costs nothing per message and stays clear of the
+consent rules that govern texting someone who never signed up for anything. A
+server-sent SMS is the fallback only, and if we ship it: one message, no follow-ups,
+clear sender identity and opt-out. The install link is the advertising. A drip campaign
+to a number that never opted in is not something we do.
+
+Abuse surface: a player controlling a second number (burner or VOIP) can attest their
+own claims. Mitigations:
+
+- Rate limit by number, across every account it has ever attested for, not per player.
+- Per-pair cooldowns apply to phone numbers exactly as they do to linked accounts.
+- A number can back only a small number of distinct pairs.
+- A number already tied to the player's own account cannot attest their claims.
+- An unlinked attestation (code redeemed, app never installed) grants reduced energy
+  compared to one from a linked account.
+
+Store the number hashed, for dedupe and rate limiting only. There is no reason to hold
+plaintext contact details for people who are not users.
 
 ### Daily milestone cap
 
