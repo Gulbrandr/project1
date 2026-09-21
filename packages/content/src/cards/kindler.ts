@@ -1,0 +1,60 @@
+import type { CardDef } from '@adulting/shared';
+
+/** Kindler: tempo bought with HP, pressure applied with burn. */
+export const kindlerCards: readonly CardDef[] = [
+  {
+    id: 'knd_spark',
+    name: 'Spark',
+    classId: 'kindler',
+    type: 'attack',
+    rarity: 'common',
+    cost: 0,
+    needsTarget: true,
+    exhaust: false,
+    effects: [{ kind: 'damage', amount: 4, target: 'chosenFoe' }],
+    text: 'Deal 4 damage.',
+  },
+  {
+    id: 'knd_kindle',
+    name: 'Kindle',
+    classId: 'kindler',
+    type: 'skill',
+    rarity: 'common',
+    cost: 1,
+    needsTarget: true,
+    exhaust: false,
+    effects: [{ kind: 'status', status: 'burn', stacks: 3, target: 'chosenFoe' }],
+    text: 'Apply 3 Burn.',
+  },
+  {
+    id: 'knd_stoke',
+    name: 'Stoke',
+    classId: 'kindler',
+    type: 'skill',
+    rarity: 'uncommon',
+    cost: 0,
+    needsTarget: false,
+    exhaust: false,
+    effects: [
+      { kind: 'loseHp', amount: 3, target: 'self' },
+      { kind: 'energy', amount: 2, target: 'self' },
+    ],
+    text: 'Lose 3 HP. Gain 2 Energy.',
+  },
+  {
+    id: 'knd_flashover',
+    name: 'Flashover',
+    classId: 'kindler',
+    type: 'attack',
+    rarity: 'rare',
+    cost: 2,
+    needsTarget: false,
+    exhaust: false,
+    effects: [
+      { kind: 'damage', amount: 8, target: 'allFoes' },
+      { kind: 'status', status: 'burn', stacks: 2, target: 'allFoes' },
+    ],
+    text: 'Deal 8 damage to all foes and apply 2 Burn.',
+    loreRef: 'lore.ch2.flashover',
+  },
+];
