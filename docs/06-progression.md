@@ -66,6 +66,39 @@ fake in a burst, because everything rests on self-reported completions.
 Avoid raw-volume milestones. The economy already applies `dailyDecay` to discourage
 task-spam, and a "complete 500 tasks" milestone would fight it.
 
+### Shared milestones
+
+A milestone done together with another person is not a personal milestone. It is a
+shared claim, and it pays into a separate pool: **milestone energy**, held jointly by
+the people who did it.
+
+One real event produces one claim, never two. Two people who went to the store
+together do not each bank a personal errand milestone; they bank shared energy. This
+is both the honest reading of what happened and the thing that closes the obvious
+collusion loop, where two accounts attest each other's fabricated days for double
+personal credit.
+
+Shared energy spends only on coop-facing progression: party equipment, `bond` keyword
+gear, shared lore chapters, coop tract access. Nothing it buys is solo power. That
+also gives Warden a progression source that matches its identity, since it is the one
+class whose cards assume someone else is on the board.
+
+Rules:
+
+- A shared claim requires attestation from every participant, from their own account.
+- Shared claims have their own daily cap, separate from the personal cap, so social
+  activity never cannibalizes solo progression.
+- The cap is per pair (or per group), not per person, so one account cannot farm
+  shared energy by cycling through many partners.
+- A cooldown applies per pair, so the same two people cannot bank repeat claims for
+  the same kind of outing in one day.
+
+Open question: what happens when the companion does not use the app. Options are to
+credit it as an ordinary personal milestone (no double-credit risk exists, since only
+one account is involved), or to let the player flag it as accompanied for a reduced
+shared credit into a solo-held energy pool. Leaning toward the first, since the second
+invents an unverifiable claim type.
+
 ### Daily milestone cap
 
 A player can claim only a limited number of milestones per day, and the cap rises

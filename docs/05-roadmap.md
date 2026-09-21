@@ -33,8 +33,13 @@ ever raises limits; never required to play.
 - Recurrence model: RRULE subset vs custom. Leaning custom (daily/weekly/interval/monthly-day).
 - Do keywords live only on card definitions, or can equipment add keywords to cards?
 - What is the exact daily milestone cap curve by level?
+- Shared milestones when the companion does not use the app: personal credit, or a
+  reduced solo-held shared credit?
 - Push notifications: opt-in copy needs to stay non-punitive.
 
 ## Settled
+- A milestone done with other people is a shared claim paying into joint milestone
+  energy, not a personal milestone. One real event, one claim. Shared energy buys
+  coop-facing progression only.
 - Runs grant no material rewards. Combat can trigger a milestone via mastery records,
   never grant cards, motes or equipment. Removes the coop collusion incentive.
