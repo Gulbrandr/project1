@@ -9,7 +9,7 @@ apps/api         NestJS + Prisma + Postgres, authoritative coop server
 packages/shared  Domain types, zod schemas, wire protocol
 packages/engine  Deterministic battle engine (pure TS, no IO)
 packages/content Cards, classes, enemies, packs, lore
-docs/            Design, architecture, data model, economy, progression, roadmap
+docs/            Design, architecture, data model, economy, progression, canon, roadmap
 ```
 
 Start with `docs/00-overview.md`.

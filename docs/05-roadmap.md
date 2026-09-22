@@ -5,7 +5,8 @@ Workspace, shared types, engine core, content seed, app shell, API module map.
 
 ## M1 — Todo that stands alone
 Local SQLite tasks/habits, recurrence, streaks, mote ledger client-side, Today screen.
-Ship-worthy as a plain todo app even if nothing else lands.
+First seed canon (health, home, money, admin), on-device eligibility profile, citations
+in the UI. Ship-worthy as a plain todo app even if nothing else lands.
 
 ## M2 — Solo combat
 Node map, 1 tract, 1 class (Steward), 12 cards, 6 enemies, 1 boss. Engine driven, client only.
@@ -25,13 +26,18 @@ lobbies, so no moderation, reporting or chat surface to build.
 
 ## M6 — Self help layer
 Weekly reflection, load balancing suggestions, category insight tied to class affinity,
-recovery milestones and lapse handling.
+recovery milestones and lapse handling. Programs: ramp, rotation, collapse mode and
+graduation, with Home Reset as the worked example.
 
 ## M7 — Proof (optional)
 Opt-in evidence attached to a completion (photo, timer, location, integration). Only
 ever raises limits; never required to play.
 
 ## Open questions
+- ePSS and CDC schedule API terms: confirm before depending on them at runtime.
+- Per-jurisdiction data (license, registration, inspection): source and maintenance cost.
+- Program capacity: adaptive ramp based on observed completion rate, or two fixed
+  intensities the user switches between?
 - Recurrence model: RRULE subset vs custom. Leaning custom (daily/weekly/interval/monthly-day).
 - Do keywords live only on card definitions, or can equipment add keywords to cards?
 - What is the exact daily milestone cap curve by level?

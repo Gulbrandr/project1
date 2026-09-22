@@ -21,6 +21,21 @@ Normalized. Balances are derived from ledgers, never stored as mutable columns.
 - `SharedClaim(id, milestoneId, energy, createdAt)` + participants — one real event,
   one claim, joint energy.
 
+## Canon
+
+Templates are content, not database rows. The DB stores instantiation and progress only.
+
+- `SeedInstance(id, userId, seedTemplateId, dueAt, state, contentVersion)` — a seeded
+  obligation materialized into this user's list.
+- `ProgramEnrollment(id, userId, programId, baseline, intensity, week, startedAt,
+  collapsedAt, graduatedAt)`
+- `ProgramTaskLink(enrollmentId, taskId, week, zone)` — which generated tasks belong to
+  which ramp week.
+- `Profile` is local only. Age, sex at birth, household, vehicle, pets, dependents,
+  jurisdiction and risk flags never leave the device; eligibility is evaluated there.
+- Reschedules: when a guideline changes, a content version bump reschedules open
+  `SeedInstance` rows rather than editing templates in place.
+
 ## Economy
 
 - `MoteLedger(id, userId, delta, reason, refType, refId, createdAt)`

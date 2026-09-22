@@ -29,6 +29,10 @@ Motes for money. Monetization (if any) is cosmetic and lore chapters, decided la
   never grants cards, motes or equipment.
 - Milestone claims are rate limited per day, with the cap rising by character level.
   Fabricated completions cannot be converted into a burst of power.
+- Preseeded tasks carry provenance. Every one shows its source, and conventions are
+  labeled as conventions rather than dressed up as guidance.
+- Health content is information, never diagnosis or personalized advice. The eligibility
+  profile stays on the device.
 
 ## Repo layout
 
@@ -37,5 +41,5 @@ apps/mobile      Expo React Native client
 apps/api         NestJS + Prisma + Postgres, authoritative coop server
 packages/shared  Domain types, zod schemas, wire protocol
 packages/engine  Deterministic battle engine (pure TS, no IO)
-packages/content Cards, classes, enemies, packs, lore (data + loaders)
+packages/content Cards, classes, enemies, packs, lore, task canon (data + loaders)
 ```
